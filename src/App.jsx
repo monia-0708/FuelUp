@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import Header from '.components/Header';
+
 import AddPrice from "./components/AddPrice";
 import Prices from "./components/Prices";
 
@@ -10,6 +12,7 @@ import Signup from "./views/Singup";
 function App() {
   return (
     <Router>
+      <Header />
       <Routes>
         <Route path="/" element={<Prices />} />
         <Route path="/addPrice" element={<AddPrice />} />
