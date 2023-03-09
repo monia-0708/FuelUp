@@ -10,12 +10,15 @@
   },
   "dependencies": {
     "@monaco-editor/react": "^4.4.6",
+    "@supabase/auth-helpers-nextjs": "^0.5.5",
+    "@supabase/auth-helpers-react": "^0.3.1",
     "@supabase/supabase-js": "^2.10.0",
     "primeflex": "^3.3.0",
     "primeicons": "^6.0.1",
     "primereact": "^9.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-google-maps": "^9.4.5",
     "react-router-dom": "^6.8.2",
     "sass": "^1.58.3"
   },

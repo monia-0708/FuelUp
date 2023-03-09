@@ -1,3 +1,7 @@
+@import './scss/variables.scss';
+
+
+
 html {
     font-size: 10px;
 }
@@ -6,6 +10,14 @@ body {
 margin: 0;
 padding: 0;
 box-sizing: border-box;
+max-width: 375px;
+
+background-color: $background-color;
 
 font-weight: normal;
+color: $text-color;
 }
+
+@import './scss/header.scss';
+@import './scss/prices.scss';
+@import './scss/addPrice.scss';
