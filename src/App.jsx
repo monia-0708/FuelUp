@@ -3,10 +3,13 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from './components/Header';
 
 import AddPrice from "./components/AddPrice";
-import Prices from "./components/Prices";
+import Map from "./components/Map";
 
 import Signin from "./views/Signin";
 import Signup from "./views/Signup";
+
+import React from 'react';
+
 
 
 
@@ -15,7 +18,7 @@ function App() {
     <Router>
       <Header />
       <Routes>
-        <Route path="/" element={<Prices />} />
+        <Route path="/" element={<Map />} />
         <Route path="/addPrice" element={<AddPrice />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
