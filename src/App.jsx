@@ -4,6 +4,7 @@ import Header from './components/Header';
 
 import AddPrice from "./components/AddPrice";
 import Map from "./components/Map";
+import Prices from "./components/Prices";
 
 import Signin from "./views/Signin";
 import Signup from "./views/Signup";
@@ -19,6 +20,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Map />} />
+        <Route path="/prices" element={<Prices />} />
         <Route path="/addPrice" element={<AddPrice />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
