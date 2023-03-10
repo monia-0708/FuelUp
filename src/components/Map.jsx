@@ -1,20 +1,22 @@
 import React from 'react'
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 
 const containerStyle = {
-  width: '400px',
-  height: '400px'
+  width: '375px',
+  height: '600px'
 };
 
 const center = {
-  lat: -3.745,
-  lng: -38.523
+  lat: 54.526882,
+  lng: 18.512408
 };
+
+
 
 function Map() {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: "AIzaSyAnw_f_nUwUu0pOsWwBeRJ2jkqVbYAbMoI"
+    googleMapsApiKey: import.meta.env.VITE_REACT_APP_GOOGLE_MAPS_API_KEY
   })
 
   const [map, setMap] = React.useState(null)
@@ -32,6 +34,7 @@ function Map() {
   }, [])
 
   return isLoaded ? (
+    
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
@@ -41,71 +44,16 @@ function Map() {
       >
         { /* Child components, such as markers, info windows, etc. */ }
         <></>
+        <Marker
+        icon={"https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"}
+        position={center}
+        />
       </GoogleMap>
+      
   ) : <></>
 }
 
 export default React.memo(Map)
 
 
-
-
-
-
-
-// import React from 'react'
-// import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
-
-// function Map() {
-//   const { isLoaded } = useLoadScript({
-//     googleMapsApiKey: AIzaSyAnw_f_nUwUu0pOsWwBeRJ2jkqVbYAbMoI
-//   });
-//   return <Google />;
-// }
-
-// function Google() {
-//   const center = useMemo(() => ({ lat: 54.518890, lng: 18.530540 }), [])
-
-//   return (
-//     <GoogleMap zoom={10} center={center} mapContainerClassName="map-container">
-//       <Marker position={center} />
-//       </GoogleMap>
-//   )
-// }
-
-
-
-// export default Map;
-
-
-// import React from 'react';
-// import { GoogleMap, LoadScript, Marker } from 'google-map-react';
-
-// function Map() {
-//   const mapStyles = {
-//     height: "300px",
-//     width: "200px"
-//   };
-
-//   const defaultCenter = {
-//     lat: 54.518890,
-//     lng: 18.530540
-//   };
-
-//   return (
-//     <LoadScript
-//       googleMapsApiKey={AIzaSyAnw_f_nUwUu0pOsWwBeRJ2jkqVbYAbMoI}
-//     >
-//       <GoogleMap
-//         mapContainerStyle={mapStyles}
-//         zoom={10}
-//         center={defaultCenter}
-//       >
-//         <Marker position={defaultCenter} />
-//       </GoogleMap>
-//     </LoadScript>
-//   );
-// }
-
-// export default Map;
 

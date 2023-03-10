@@ -1,14 +1,19 @@
-.header-container {
-    margin: auto;
+.header-container {    
     display: flex;
-    justify-content: center;    
+    justify-content: space-between;    
     align-items: center;
+    margin-bottom: 20px;
+    margin-left: 150px;
+    font-size: 15px;
 
-    .signin {    
-         
-            font-size: 50px;
+    .signin  { 
+        margin-right: 20px;       
+        .pi-user {
             color: $logo;
+            font-size: 25px;
+            
         }
+      }
     }
 
 

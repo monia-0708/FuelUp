@@ -1,5 +1,11 @@
+
+
 function Signin() {
-    return <h1>Signin</h1>;
+    return (
+    <div className="signin-window">
+
+    </div>
+    )
 }
 
 export default Signin;
