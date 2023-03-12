@@ -1,5 +1,6 @@
 import React from 'react'
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
+import Array from './Array';
 
 const containerStyle = {
   width: '375px',
@@ -11,8 +12,6 @@ const center = {
   lng: 18.512408
 };
 
-
-
 function Map() {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
@@ -22,7 +21,6 @@ function Map() {
   const [map, setMap] = React.useState(null)
 
   const onLoad = React.useCallback(function callback(map) {
-    // This is just an example of getting and using the map instance!!! don't just blindly copy!
     const bounds = new window.google.maps.LatLngBounds(center);
     map.fitBounds(bounds);
 
@@ -34,7 +32,6 @@ function Map() {
   }, [])
 
   return isLoaded ? (
-    
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
@@ -42,18 +39,16 @@ function Map() {
         onLoad={onLoad}
         onUnmount={onUnmount}
       >
-        { /* Child components, such as markers, info windows, etc. */ }
         <></>
-        <Marker
-        icon={"https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"}
-        position={center}
-        />
+        {/* {Array.map((stacja) => (
+          <Marker
+            key={stacja.id}
+            position={{ lat: stacja.lat, lng: stacja.lng }}
+            icon={"https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"}
+          />
+        ))} */}
       </GoogleMap>
-      
   ) : <></>
 }
 
 export default React.memo(Map)
-
-
-
