@@ -1,7 +1,5 @@
 import React from "react";
-import Search from "./Search";
 
-function Array() {
    const stacje = [
     {
       id: 1,
@@ -253,15 +251,18 @@ function Array() {
       icon: ""
     },
   ];
+
   const sortedStacje = [...stacje].sort((a, b) => {
     const priceA = parseFloat(a.prices.find(price => price.includes("benzyna 95")).split(" - ")[1]);
     const priceB = parseFloat(b.prices.find(price => price.includes("benzyna 95")).split(" - ")[1]);
     return priceA - priceB;
   });
 
+  
+function Array() {
+
   return (
-    <>
-      <Search />
+    <>      
       <div>
         <h2>Stacje paliw posortowane wg. ceny benzyny 95:</h2>
         <ul>
