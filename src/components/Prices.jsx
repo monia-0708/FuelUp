@@ -2,8 +2,7 @@ import { Button } from "primereact/button";
 import Array from "./Array";
 import Map from "./Map";
 import React, { useState } from "react";
-import Search from './Search'; // dodaj import komponentu Search na początku pliku
-
+import Search from './Search'; 
 function Prices() {
   const [set, setSet] = useState(1);
 

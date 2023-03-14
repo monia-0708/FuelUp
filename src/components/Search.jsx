@@ -10,7 +10,7 @@ import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { purple } from "@mui/material/colors";
-import Array from "./Array";
+import { stacje } from "./Demo";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -25,22 +25,28 @@ const MenuProps = {
 
 const price = ["benzyna 95", "diesel ON", "gaz LPG"];
 
-const name = [
-  "Shell",
-  "Orlen",
-  "Lotos",
-  "BP",
-  "MOYA",
-  "Pod Żaglami",
-  "AUTO - DAREX",
-  "Cirkle K",
-  "BMG",
-  "Zaznacz wszystkie",
-];
+const names = [...new Set(stacje.map((stacja) => stacja.name))];
+
+// const benz = stacje.flatMap(stacja => stacja.prices.map(price => {
+//   const match = price.match(/(\d+(?:\.\d+)?)\s+zl/);
+//   return match ? parseFloat(match[1]) : null;
+// }));
+
+// console.log(benz);
+
+// benz.sort((a, b) => a - b);
+
+// const benz = stacje.map(stacja => {
+//   const cena = stacja.prices.find(cena => cena.includes('benzyna 95'));
+//   return cena ? cena.split(' - ')[1] : null;
+// });
+
+// console.log(benz);
+
 
 function Search() {
   const [fuelPrice, setFuelPrice] = React.useState([]);
-  const [nameStation, setNameStation] = React.useState([]);
+  const [namesStation, setNamesStation] = React.useState([]);
 
   const handlePriceChange = (event) => {
     const {
@@ -52,11 +58,11 @@ function Search() {
     );
   };
 
-  const handleNameChange = (event) => {
+  const handleNamesChange = (event) => {
     const {
       target: { value },
     } = event;
-    setNameStation(
+    setNamesStation(
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
@@ -109,15 +115,15 @@ function Search() {
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
           multiple
-          value={nameStation}
-          onChange={handleNameChange}
+          value={namesStation}
+          onChange={handleNamesChange}
           input={<OutlinedInput label="Wyszukaj stacje" />}
           renderValue={(selected) => selected.join(", ")}
           MenuProps={MenuProps}
         >
-          {name.map((name) => (
+          {names.map((name) => (
             <MenuItem key={name} value={name}>
-              <Checkbox checked={nameStation.indexOf(name) > -1} />
+              <Checkbox checked={namesStation.indexOf(name) > -1} />
               <ListItemText primary={name} />
             </MenuItem>
           ))}
