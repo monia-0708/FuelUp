@@ -23,49 +23,53 @@ const MenuProps = {
   },
 };
 
-const price = ["benzyna 95", "diesel ON", "gaz LPG"];
-
-const names = [...new Set(stacje.map((stacja) => stacja.name))];
-
-// const benz = stacje.flatMap(stacja => stacja.prices.map(price => {
-//   const match = price.match(/(\d+(?:\.\d+)?)\s+zl/);
-//   return match ? parseFloat(match[1]) : null;
-// }));
-
-// console.log(benz);
-
-// benz.sort((a, b) => a - b);
-
-// const benz = stacje.map(stacja => {
-//   const cena = stacja.prices.find(cena => cena.includes('benzyna 95'));
-//   return cena ? cena.split(' - ')[1] : null;
-// });
-
-// console.log(benz);
-
-
 function Search() {
   const [fuelPrice, setFuelPrice] = React.useState([]);
   const [namesStation, setNamesStation] = React.useState([]);
+
+  function getFilteredStations(selectedPrices) {
+    return stacje.filter((station) => {
+      const stationPrices = station.prices;
+      return selectedPrices.every((price) =>
+        stationPrices.hasOwnProperty(price)
+      );
+    });
+  }
 
   const handlePriceChange = (event) => {
     const {
       target: { value },
     } = event;
-    setFuelPrice(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
+
+    const selectedPrices = typeof value === "string" ? value.split(",") : value;
+    setFuelPrice(selectedPrices);
+
+    // Filter the stations based on selected fuel prices
+    const filteredStations = getFilteredStations(selectedPrices);
+    // Do something with the filtered stations array
   };
 
   const handleNamesChange = (event) => {
     const {
       target: { value },
     } = event;
+
+    const selectedStationNames =
+      typeof value === "string" ? value.split(",") : value;
+
+    console.log(value);
+
     setNamesStation(
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
+
+    // Filter the array of stations based on the selected station name(s)
+    const selectedStations = stacje.filter((stacja) =>
+      selectedStationNames.includes(stacja.name)
+    );
+
+    setNamesStation(selectedStations);
   };
 
   const ColorButton = styled(Button)(({ theme }) => ({
@@ -75,6 +79,11 @@ function Search() {
       backgroundColor: purple[700],
     },
   }));
+
+  const uniqueStationNames = [...new Set(stacje.map((stacja) => stacja.name))];
+  const allPrices = [
+    ...new Set(stacje.flatMap((station) => Object.keys(station.prices))),
+  ];
 
   return (
     <div className="search-container">
@@ -95,10 +104,10 @@ function Search() {
           renderValue={(selected) => selected.join(", ")}
           MenuProps={MenuProps}
         >
-          {price.map((name) => (
-            <MenuItem key={name} value={name}>
-              <Checkbox checked={fuelPrice.indexOf(name) > -1} />
-              <ListItemText primary={name} />
+          {allPrices.map((price) => (
+            <MenuItem key={price} value={price}>
+              <Checkbox checked={fuelPrice.indexOf(price) > -1} />
+              <ListItemText primary={price} />
             </MenuItem>
           ))}
         </Select>
@@ -121,10 +130,17 @@ function Search() {
           renderValue={(selected) => selected.join(", ")}
           MenuProps={MenuProps}
         >
-          {names.map((name) => (
-            <MenuItem key={name} value={name}>
-              <Checkbox checked={namesStation.indexOf(name) > -1} />
-              <ListItemText primary={name} />
+          {uniqueStationNames.map((stationName) => (
+            <MenuItem key={stationName} value={stationName}>
+              <Checkbox
+                checked={
+                  stacje
+                    .filter((stacja) => stacja.name === stationName)
+                    .findIndex((item) => namesStation.indexOf(item) !== -1) !==
+                  -1
+                }
+              />
+              <ListItemText primary={stationName} />
             </MenuItem>
           ))}
         </Select>
@@ -132,6 +148,18 @@ function Search() {
       <Stack sx={{ width: 350 }}>
         <ColorButton variant="contained">Gdzie Najtaniej ?</ColorButton>
       </Stack>
+      <div>
+        {namesStation.map((station) => (
+          <div key={station.id}>
+            <h2>{station.name}</h2>
+            <ul>
+              <li> benzyna 95 - {station.prices.pb95} zł </li>
+              <li> diesel ON - {station.prices.on} zł </li>
+              <li> gaz LPG - {station.prices.lpg} zł </li>
+            </ul>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

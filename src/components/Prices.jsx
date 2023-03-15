@@ -26,7 +26,8 @@ function Prices() {
           </span>
           {set === 2 && <Map />} {/* warunek, aby wyświetlić Map tylko dla set=2 */}
           {set === 1 && <Search />} {/* warunek, aby wyświetlić Search tylko dla set=1 */}
-          {set === 1 && <Array />} {/* warunek, aby wyświetlić Array tylko dla set=1 */}
+          {set === 1 && <Array />}
+           {/* warunek, aby wyświetlić Array tylko dla set=1 */}
         </div>
       </div>
     </>

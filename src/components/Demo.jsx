@@ -28,7 +28,7 @@ export const stacje = [
     lat: 54.526868478514274,
     lng: 18.512608871267954,
     name: "Shell",
-    address: "ul. Morska 58, 81-225 Gdynia",
+    address: "Morska 58, 81-225 Gdynia",
     prices: {
       pb95: 6.25,
       on: 7.41,
