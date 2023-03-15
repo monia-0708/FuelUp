@@ -11,6 +11,7 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { purple } from "@mui/material/colors";
 import { stacje } from "./Demo";
+import StationSelectCheckmarks from "./Select"
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -27,28 +28,34 @@ function Search() {
   const [fuelPrice, setFuelPrice] = React.useState([]);
   const [namesStation, setNamesStation] = React.useState([]);
 
-  function getFilteredStations(selectedPrices) {
-    return stacje.filter((station) => {
-      const stationPrices = station.prices;
-      return selectedPrices.every((price) =>
-        stationPrices.hasOwnProperty(price)
-      );
-    });
-  }
-
   const handlePriceChange = (event) => {
     const {
       target: { value },
     } = event;
-
+  
     const selectedPrices = typeof value === "string" ? value.split(",") : value;
     setFuelPrice(selectedPrices);
-
+  
     // Filter the stations based on selected fuel prices
-    const filteredStations = getFilteredStations(selectedPrices);
-    // Do something with the filtered stations array
+    const filteredStations = stacje.filter((station) => {
+      const stationPrices = station.prices;
+      return selectedPrices.some((price) => stationPrices.hasOwnProperty(price));
+    });
+  
+    // Create an array of prices for selected fuels
+    const selectedFuelPrices = selectedPrices.reduce((acc, curr) => {
+      filteredStations.forEach((station) => {
+        if (station.prices.hasOwnProperty(curr)) {
+          acc.push(station.prices[curr]);
+        }
+      });
+      return acc;
+    }, []);
+  
+    // Do something with the filtered stations and selected fuel prices
+    console.log(filteredStations, selectedFuelPrices);
   };
-
+  
   const handleNamesChange = (event) => {
     const {
       target: { value },
@@ -160,6 +167,8 @@ function Search() {
           </div>
         ))}
       </div>
+      
+      {/* < StationSelectCheckmarks /> */}
     </div>
   );
 }
