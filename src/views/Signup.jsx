@@ -7,6 +7,16 @@ function Signup() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [value, setValue] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const load = () => {
+      setLoading(true);
+
+      setTimeout(() => {
+          setLoading(false);
+      }, 500);
+  };
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -41,8 +51,10 @@ function Signup() {
         </div>
         </span>
 
-        {/* <br />
-      <button type="submit">Log in</button> */}
+        <br />
+        <div className="card flex flex-wrap justify-content-center gap-3">
+            <Button label="Zaloguj się" icon="pi pi-check" loading={loading} onClick={load} />
+        </div>
       </form>
     </div>
   );

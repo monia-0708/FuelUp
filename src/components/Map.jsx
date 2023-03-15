@@ -1,6 +1,13 @@
 import React from 'react'
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import {stacje} from './Demo';
+import shell from "../assets/shell.svg";
+import orlen from "../assets/orlen.svg";
+import Gas from "../assets/Gas.svg";
+import lotos from "../assets/lotos.svg";
+import bp from "../assets/bp.svg";
+import circle from "../assets/circle.svg";
+import bmg from "../assets/bmg.svg";
 
 
 const containerStyle = {
@@ -42,13 +49,48 @@ function Map(props) {
           {stacje.map((stacja) => {
             return (
               <div key={stacja.id}>
-            <Marker position={{ lat: stacja.lat, lng: stacja.lng }} icon={"https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"}
-            //dodanie icon z logo
-            // options={{ icon: stacja.name === 'Shell' ? shell : stacja.name === 'Orlen'? orlen : stacja.name === 'BP' ? bp:stacja.name === 'Lotos' ? lotos : stacja.name === 'MOYA' ? shell : stacja.name === 'Pod Żaglami' ? pod zaglami : stacja.name === 'AUTO - DAREX' ? auto - darex : stacja.name === 'Circle K' ? circleK : stacja.name === 'BMG' ? bmg : "",
-            // }} 
+            <Marker position={{ lat: stacja.lat, lng: stacja.lng }} 
+           
+            options={{ 
+              icon:
+          stacja.name === "Shell"
+            ? {
+                url: shell,
+                scaledSize: new window.google.maps.Size(20, 20),
+              }
+            : stacja.name === "Orlen"
+            ? {
+                url: orlen,
+                scaledSize: new window.google.maps.Size(50, 50),
+              }
+              : stacja.name === "Lotos"
+            ? {
+                url: lotos,
+                scaledSize: new window.google.maps.Size(40, 40),
+              }
+             : stacja.name === "BP"
+            ? {
+                url: bp,
+                scaledSize: new window.google.maps.Size(30, 30),
+              }
+              : stacja.name === "Circle K"
+            ? {
+                url: circle,
+                scaledSize: new window.google.maps.Size(50, 50),
+              }
+              : stacja.name === "BMG"
+            ? {
+                url: bmg,
+                scaledSize: new window.google.maps.Size(30, 30),
+            }
+            : {
+                url: Gas,
+                scaledSize: new window.google.maps.Size(20, 20),
+              },
+            }} 
             />
             </div>
-            );
+            )
            })}
         </GoogleMap>
       </>

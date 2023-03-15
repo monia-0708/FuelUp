@@ -16,6 +16,7 @@
     "@supabase/auth-helpers-nextjs": "^0.5.5",
     "@supabase/auth-helpers-react": "^0.3.1",
     "@supabase/supabase-js": "^2.10.0",
+    "mdb-react-ui-kit": "^5.1.0",
     "multiselect-react-dropdown": "^2.0.25",
     "primeflex": "^3.3.0",
     "primeicons": "^6.0.1",

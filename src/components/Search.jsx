@@ -11,10 +11,10 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { purple } from "@mui/material/colors";
 import { stacje } from "./Demo";
+import { Card } from 'primereact/card';
 
 const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
+const ITEM_PADDING_TOP = 8;const MenuProps = {
   PaperProps: {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
@@ -27,12 +27,26 @@ function Search() {
   const [fuelPrice, setFuelPrice] = React.useState([]);
   const [namesStation, setNamesStation] = React.useState([]);
   const [filteredStations, setFilteredStations] = React.useState([]);
+ 
+
+  // const allPrices = [
+  //   ...new Set(stacje.flatMap((station) => Object.keys(station.prices))),
+  // ];
   const [selectedFuelPrices, setSelectedFuelPrices] = React.useState([]);
 
   const handlePriceChange = (event) => {
     const {
-      target: { value },
+      target: { value, checked },
     } = event;
+
+    // if (checked) {
+    //   setFuelPrice((prevSelected) => [...prevSelected, value]);
+    // } else {
+    //   setFuelPrice((prevSelected) =>
+    //     prevSelected.filter((item) => item !== value)
+    //   );
+    // }
+  
 
     const selectedPrices = typeof value === "string" ? value.split(",") : value;
     setFuelPrice(selectedPrices);
@@ -40,37 +54,42 @@ function Search() {
     // Filter the stations based on selected fuel prices
     const filteredStations = stacje.filter((station) => {
       const stationPrices = station.prices;
-      return selectedPrices.some((price) =>
-        stationPrices.hasOwnProperty(price)
-      );
+      return selectedPrices.some((price) => stationPrices.hasOwnProperty(price));
     });
 
     // Create an array of prices for selected fuels
-    const selectedFuelPrices = filteredStations.reduce((acc, curr) => {
-      const prices = {};
-      selectedPrices.forEach((price) => {
-        if (curr.prices.hasOwnProperty(price)) {
-          prices[price] = curr.prices[price];
+    const selectedFuelPrices = filteredStations.map((station) => {
+      const stationPrices = station.prices;
+      const fuelPrices = selectedPrices.reduce((acc, curr) => {
+        if (stationPrices.hasOwnProperty(curr)) {
+          acc.push({ fuelType: curr, fuelPrice: stationPrices[curr] });
         }
-      });
-      if (Object.keys(prices).length > 0) {
-        acc.push({ name: curr.name, prices: prices });
-      }
-      return acc;
-    }, []);
+        return acc;
+      }, []);
+      return {
+        name: station.name,
+        fuelPrices: fuelPrices.sort((a, b) => a.fuelPrice - b.fuelPrice),
+      };
+    });
 
-    // Update the filtered stations and selected fuel prices in state
-    setFilteredStations(filteredStations);
+    // Set the selected fuel prices
     setSelectedFuelPrices(selectedFuelPrices);
-
-    // Do something with the filtered stations and selected fuel prices
-    console.log(filteredStations, selectedFuelPrices);
   };
 
   const handleNamesChange = (event) => {
     const {
-      target: { value },
+      target: { value, checked },
     } = event;
+    
+  
+    // if (checked) {
+    //   setNamesStation((prevSelected) => [...prevSelected, value]);
+    // } else {
+    //   setNamesStation((prevSelected) =>
+    //     prevSelected.filter((item) => item !== value)
+    //   );
+    // }
+  
 
     const selectedStationNames =
       typeof value === "string" ? value.split(",") : value;
@@ -88,6 +107,11 @@ function Search() {
     );
 
     setNamesStation(selectedStations);
+  };
+//wyswietlenie przesortowanych tablic z dwoch select checkboxow
+  const handleClick = () => {
+    const allSelectedProducts = [...filteredStations];
+    console.log(allSelectedProducts);
   };
 
   const ColorButton = styled(Button)(({ theme }) => ({
@@ -164,12 +188,34 @@ function Search() {
         </Select>
       </FormControl>
       <Stack sx={{ width: 350 }}>
-        <ColorButton variant="contained">Gdzie Najtaniej ?</ColorButton>
+        <ColorButton onClick={handleClick} variant="contained">Gdzie Najtaniej ?</ColorButton>
       </Stack>
-      <div>
+      <Card title="">
+      <ul>
+      {selectedFuelPrices.length > 0 && (
+        <ul>
+          {selectedFuelPrices.map((station) => (
+            <li key={station.name}>
+              <h3>{station.name}</h3>
+              <ul>
+                {station.fuelPrices.map((fuel) => (
+                  <li key={fuel.fuelType}>
+                    {fuel.fuelType} - {fuel.fuelPrice} zł
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
+      )}
+        </ul>
+        </Card>
+      <Card title="">
+      <div className="m-0">
         {namesStation.map((station) => (
           <div key={station.id}>
             <h2>{station.name}</h2>
+            <h3>{station.address}</h3>
             <ul>
               <li> benzyna 95 - {station.prices.pb95} zł </li>
               <li> diesel ON - {station.prices.on} zł </li>
@@ -178,24 +224,8 @@ function Search() {
           </div>
         ))}
       </div>
-      <ul>
-      {fuelPrice.length > 0 && (
-        <div>
-          {selectedFuelPrices.map((station) => (
-            <li key={station.id}>
-              <h3>{station.name}</h3>              
-              <ul>
-                {Object.entries(station.prices).map(([key, value]) => (
-                  <li key={key}>
-                    {key} - {value} zł
-                  </li>
-                ))}
-              </ul>
-            </li>
-          ))}
-        </div>
-      )}
-        </ul>
+      </Card>
+      
     </div>
   );
 }
