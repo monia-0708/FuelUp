@@ -180,20 +180,20 @@ function Search() {
       </div>
       <ul>
       {fuelPrice.length > 0 && (
-        <ul>
+        <div>
           {selectedFuelPrices.map((station) => (
             <li key={station.id}>
-              <h3>{station.name}</h3>
+              <h3>{station.name}</h3>              
               <ul>
                 {Object.entries(station.prices).map(([key, value]) => (
                   <li key={key}>
-                    {key}: {value}
+                    {key} - {value} zł
                   </li>
                 ))}
               </ul>
             </li>
           ))}
-        </ul>
+        </div>
       )}
         </ul>
     </div>

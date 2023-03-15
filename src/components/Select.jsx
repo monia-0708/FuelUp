@@ -10,81 +10,81 @@ export default function Cheapest() {
   )
 }
 
-const handlePriceChange = (event) => {
-  const {
-    target: { value },
-  } = event;
+// const handlePriceChange = (event) => {
+//   const {
+//     target: { value },
+//   } = event;
 
-  const selectedPrices = typeof value === "string" ? value.split(",") : value;
-  setFuelPrice(selectedPrices);
+//   const selectedPrices = typeof value === "string" ? value.split(",") : value;
+//   setFuelPrice(selectedPrices);
 
-  // Filter the stations based on selected fuel prices
-  const filteredStations = stacje.filter((station) => {
-    const stationPrices = station.prices;
-    return selectedPrices.some((price) => stationPrices.hasOwnProperty(price));
-  });
+//   // Filter the stations based on selected fuel prices
+//   const filteredStations = stacje.filter((station) => {
+//     const stationPrices = station.prices;
+//     return selectedPrices.some((price) => stationPrices.hasOwnProperty(price));
+//   });
 
-  // Create an array of objects with stations and selected fuel prices
-  const selectedFuelPrices = filteredStations.reduce((acc, curr) => {
-    const prices = {};
-    selectedPrices.forEach((price) => {
-      if (curr.prices.hasOwnProperty(price)) {
-        prices[price] = curr.prices[price];
-      }
-    });
-    if (Object.keys(prices).length > 0) {
-      acc.push({ name: curr.name, prices: prices });
-    }
-    return acc;
-  }, []);
+//   // Create an array of objects with stations and selected fuel prices
+//   const selectedFuelPrices = filteredStations.reduce((acc, curr) => {
+//     const prices = {};
+//     selectedPrices.forEach((price) => {
+//       if (curr.prices.hasOwnProperty(price)) {
+//         prices[price] = curr.prices[price];
+//       }
+//     });
+//     if (Object.keys(prices).length > 0) {
+//       acc.push({ name: curr.name, prices: prices });
+//     }
+//     return acc;
+//   }, []);
 
-  // Do something with the filtered stations and selected fuel prices
-  console.log(selectedFuelPrices);
-};
+//   // Do something with the filtered stations and selected fuel prices
+//   console.log(selectedFuelPrices);
+// };
 
-function Search() {
-  const [fuelPrice, setFuelPrice] = React.useState([]);
-  const allPrices = [...new Set(stacje.flatMap((station) => Object.keys(station.prices)))];
+// function Search() {
+//   const [fuelPrice, setFuelPrice] = React.useState([]);
+//   const allPrices = [...new Set(stacje.flatMap((station) => Object.keys(station.prices)))];
 
-  return (
-    <div>
-      <Select
-        labelId="demo-multiple-checkbox-label"
-        id="demo-multiple-checkbox"
-        multiple
-        value={fuelPrice}
-        onChange={handlePriceChange}
-        input={<OutlinedInput label="ALL PRICES" />}
-        renderValue={(selected) => selected.join(", ")}
-        MenuProps={MenuProps}
-      >
-        {allPrices.map((price) => (
-          <MenuItem key={price} value={price}>
-            <Checkbox checked={fuelPrice.indexOf(price) > -1} />
-            <ListItemText primary={price} />
-          </MenuItem>
-        ))}
-      </Select>
+//   return (
+//     <div>
+//       <Select
+//         labelId="demo-multiple-checkbox-label"
+//         id="demo-multiple-checkbox"
+//         multiple
+//         value={fuelPrice}
+//         onChange={handlePriceChange}
+//         input={<OutlinedInput label="ALL PRICES" />}
+//         renderValue={(selected) => selected.join(", ")}
+//         MenuProps={MenuProps}
+//       >
+//         {allPrices.map((price) => (
+//           <MenuItem key={price} value={price}>
+//             <Checkbox checked={fuelPrice.indexOf(price) > -1} />
+//             <ListItemText primary={price} />
+//           </MenuItem>
+//         ))}
+//       </Select>
 
-      {fuelPrice.length > 0 && (
-        <ul>
-          {selectedFuelPrices.map((station) => (
-            <li key={station.name}>
-              <h3>{station.name}</h3>
-              <ul>
-                {Object.entries(station.prices).map(([key, value]) => (
-                  <li key={key}>
-                    {key}: {value}
-                  </li>
-                ))}
-              </ul>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
-}
+//       {fuelPrice.length > 0 && (
+//         <ul>
+//           {selectedFuelPrices.map((station) => (
+//             <li key={station.name}>
+//               <h3>{station.name}</h3>
+//               <ul>
+//                 {Object.entries(station.prices).map(([key, value]) => (
+//                   <li key={key}>
+//                     {key}: {value}
+//                   </li>
+//                 ))}
+//               </ul>
+//             </li>
+//           ))}
+//         </ul>
+//       )}
+//     </div>
+//   );
+// }
 
 
 // import React, { useState } from "react";
