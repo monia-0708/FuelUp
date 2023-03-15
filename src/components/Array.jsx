@@ -1,18 +1,19 @@
 import React from "react";
 import { stacje } from "./Demo";
 
+
 function Array() {
   return (
-    <>
-      <div>
+    <>   
+      <div> <h1>Lista wszystkich stacji paliw</h1>
         <ul>
           {stacje.map((station) => (
-            <li key={station.id}>
+            <div key={station.id}>
               <h2>{station.name}</h2> <p> ul. {station.address}</p>
-              <p> benzyna 95 - {station.prices.pb95} zł </p> 
-              <p> diesel ON - {station.prices.on} zł </p>
-              <p> gaz LPG - {station.prices.lpg} zł </p>
-            </li>
+              <li> benzyna 95 - {station.prices.pb95} zł </li> 
+              <li> diesel ON - {station.prices.on} zł </li>
+              <li> gaz LPG - {station.prices.lpg} zł </li>
+            </div>
           ))}
         </ul>
       </div>
