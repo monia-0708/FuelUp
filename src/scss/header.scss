@@ -1,20 +1,23 @@
-.header-container {    
-    display: flex;
-    justify-content: space-between;    
-    align-items: center;
-    margin-bottom: 20px;
-    margin-left: 150px;
-    font-size: 15px;
-    
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-left: 150px;
+  font-size: 15px;
 
-    .signin  { 
-        margin-right: 20px;       
-        .pi-user {
-            color: $logo;
-            font-size: 25px;
-            
-        }
-      }
+  .logo {
+    font-size: 3rem;
+    font-weight: bold;
+    color: $logo;
+    text-shadow: 3px 3px 7px #130606;
+  }
+
+  .signin {
+    margin-right: 20px;
+    .pi-user {
+      color: $logo;
+      font-size: 25px;
     }
-
-
+  }
+}

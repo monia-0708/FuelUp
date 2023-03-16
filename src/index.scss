@@ -16,13 +16,13 @@ max-width: 375px;
 background-color: $background-color;
 
 font-weight: normal;
+font-family: 'Roboto', sans-serif;
 color: $text-color;
 }
 
 @import './scss/header.scss';
 @import './scss/map.scss';
 @import './scss/addPrice.scss';
-@import './scss/search.scss';
-@import './scss/prices.scss';
 @import './scss/signup.scss';
-
+@import './scss/prices.scss';
+@import './scss/search.scss';
