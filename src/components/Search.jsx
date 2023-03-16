@@ -26,7 +26,7 @@ const ITEM_PADDING_TOP = 8;const MenuProps = {
 function Search() {
   const [fuelPrice, setFuelPrice] = React.useState([]);
   const [namesStation, setNamesStation] = React.useState([]);
-  const [filteredStations, setFilteredStations] = React.useState([]);
+  // const [filteredStations, setFilteredStations] = React.useState([]);
  
 
   // const allPrices = [
@@ -36,17 +36,8 @@ function Search() {
 
   const handlePriceChange = (event) => {
     const {
-      target: { value, checked },
+      target: { value },
     } = event;
-
-    // if (checked) {
-    //   setFuelPrice((prevSelected) => [...prevSelected, value]);
-    // } else {
-    //   setFuelPrice((prevSelected) =>
-    //     prevSelected.filter((item) => item !== value)
-    //   );
-    // }
-  
 
     const selectedPrices = typeof value === "string" ? value.split(",") : value;
     setFuelPrice(selectedPrices);
@@ -78,18 +69,9 @@ function Search() {
 
   const handleNamesChange = (event) => {
     const {
-      target: { value, checked },
+      target: { value },
     } = event;
     
-  
-    // if (checked) {
-    //   setNamesStation((prevSelected) => [...prevSelected, value]);
-    // } else {
-    //   setNamesStation((prevSelected) =>
-    //     prevSelected.filter((item) => item !== value)
-    //   );
-    // }
-  
 
     const selectedStationNames =
       typeof value === "string" ? value.split(",") : value;
@@ -108,9 +90,9 @@ function Search() {
 
     setNamesStation(selectedStations);
   };
-//wyswietlenie przesortowanych tablic z dwoch select checkboxow
+
   const handleClick = () => {
-    const allSelectedProducts = [...filteredStations];
+    const allSelectedProducts = [...fuelPrice, ...namesStation];
     console.log(allSelectedProducts);
   };
 
@@ -126,6 +108,22 @@ function Search() {
   const allPrices = [
     ...new Set(stacje.flatMap((station) => Object.keys(station.prices))),
   ];
+//// filtrowanie po selectach
+
+  // const filterByPrices = (stacje) => {
+  //   return stacje.map((stacja) => ({
+  //     id: stacja.id,
+  //     prices: stacja.prices,
+  //   }));
+  // };
+  
+  // const filterByName = (stacje) => {
+  //   return stacje.map((stacja) => ({
+  //     id: stacja.id,
+  //     name: stacja.name,
+  //   }));
+  // };
+
 
   return (
     <div className="search-container">
@@ -178,7 +176,7 @@ function Search() {
                 checked={
                   stacje
                     .filter((stacja) => stacja.name === stationName)
-                    .findIndex((item) => namesStation.indexOf(item) !== -1) !==
+                    .findIndex((item) => namesStation.indexOf(item) !== -1) !== 
                   -1
                 }
               />

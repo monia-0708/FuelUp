@@ -9,57 +9,6 @@ export default function Cheapest() {
     </>
   )
 }
-
-const [selectedFuelPrices, setSelectedFuelPrices] = React.useState([]);
-
-const handlePriceChange = (event) => {
-  const {
-    target: { value },
-  } = event;
-
-  const selectedPrices = typeof value === "string" ? value.split(",") : value;
-  setFuelPrice(selectedPrices);
-
-  // Filter the stations based on selected fuel prices
-  const filteredStations = stacje.filter((station) => {
-    const stationPrices = station.prices;
-    return selectedPrices.some((price) => stationPrices.hasOwnProperty(price));
-  });
-
-  // Create an array of prices for selected fuels
-  const selectedFuelPrices = filteredStations.map((station) => {
-    const stationPrices = station.prices;
-    const fuelPrices = selectedPrices.reduce((acc, curr) => {
-      if (stationPrices.hasOwnProperty(curr)) {
-        acc.push({ fuelType: curr, fuelPrice: stationPrices[curr] });
-      }
-      return acc;
-    }, []);
-    return {
-      name: station.name,
-      fuelPrices: fuelPrices.sort((a, b) => a.fuelPrice - b.fuelPrice),
-    };
-  });
-
-  // Set the selected fuel prices
-  setSelectedFuelPrices(selectedFuelPrices);
-};
-
-const handleNamesChange = (event) => {
-  const {
-    target: { value },
-  } = event;
-
-  const selectedStationNames =
-    typeof value === "string" ? value.split(",") : value;
-
-  console.log(value);
-
-  setNamesStation(
-    // On autofill we get a stringified value.
-    typeof value === "string" ? value.split(",") : value
-  );
-
 // const handlePriceChange = (event) => {
 //   const {
 //     target: { value },
