@@ -1,0 +1,53 @@
+.search-price {
+  .MuiInputLabel-root {
+    color: #ebf1f1;
+  }
+
+  .MuiOutlinedInput-root {
+    &:hover .MuiOutlinedInput-notchedOutline {
+      border-color: #af4cff;
+    }
+    &.Mui-focused .MuiOutlinedInput-notchedOutline {
+      border-color: #af4cff;
+    }
+  }
+
+  .MuiSelect-root {
+    color: #ebf1f1;
+  }
+
+  .MuiCheckbox-root {
+    color: #af4cff;
+  }
+
+  .MuiListItemText-primary {
+    color: #ebf1f1;
+  }
+}
+
+.search-name {
+    .MuiInputLabel-root {
+        color: #ebf1f1;
+      }
+    
+      .MuiOutlinedInput-root {
+        &:hover .MuiOutlinedInput-notchedOutline {
+          border-color: #af4cff;
+        }
+        &.Mui-focused .MuiOutlinedInput-notchedOutline {
+          border-color: #af4cff;
+        }
+      }
+    
+      .MuiSelect-root {
+        color: #ebf1f1;
+      }
+    
+      .MuiCheckbox-root {
+        color: #af4cff;
+      }
+    
+      .MuiListItemText-primary {
+        color: #ebf1f1;
+      }     
+}

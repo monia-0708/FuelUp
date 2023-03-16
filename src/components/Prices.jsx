@@ -25,7 +25,12 @@ function Prices() {
           <span className="p-buttonset">
             <Button
               className="button-filtruj"
-              style={{ backgroundColor: "#800080" }}
+              style={{
+                backgroundColor: "#800080",
+                width: "110px",
+                marginLeft: "80px",
+                marginBottom: "20px",
+              }}
               onClick={handleSetSearch}
               label="Filtruj"
               icon="pi pi-list"
@@ -33,7 +38,11 @@ function Prices() {
 
             <Button
               className="button-mapa"
-              style={{ backgroundColor: "#800080" }}
+              style={{
+                backgroundColor: "#800080",
+                width: "110px",
+                marginBottom: "20px",
+              }}
               onClick={handleSetMap}
               label="Mapa"
               icon="pi pi-map"

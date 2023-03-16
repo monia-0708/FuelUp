@@ -134,7 +134,7 @@ function Search() {
         >
           Rodzaj paliwa
         </InputLabel>
-        <Select
+        <Select 
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
           multiple
@@ -160,7 +160,7 @@ function Search() {
         >
           Nazwa stacji
         </InputLabel>
-        <Select
+        <Select 
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
           multiple
@@ -186,7 +186,7 @@ function Search() {
         </Select>
       </FormControl>
       <Stack sx={{ width: 350 }}>
-        <ColorButton onClick={handleClick} variant="contained">Gdzie Najtaniej ?</ColorButton>
+        <ColorButton style={{ marginLeft: '20px', marginBottom: "30px", marginTop: "30px" }} onClick={handleClick} variant="contained">Gdzie Najtaniej ?</ColorButton>
       </Stack>
       <Card title="">
       <ul>

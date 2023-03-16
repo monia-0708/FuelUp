@@ -5,7 +5,7 @@ import { stacje } from "./Demo";
 function Array() {
   return (
     <>   
-      <div> <h1>Lista wszystkich stacji paliw</h1>
+      <div className="arrayPrices"> <h1 className="arrayName">Lista wszystkich stacji paliw</h1>
         <ul>
           {stacje.map((station) => (
             <div key={station.id}>
