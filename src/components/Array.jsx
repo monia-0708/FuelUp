@@ -30,21 +30,3 @@ export default Array;
 
 //   const allPrices = stacje.map((item) => Object.values(item)); console.log(allPrices) //wyswietla wszystkie wartosci objektow
 
-//  const items = stacje.map((item) => (
-//   <li key={item.id}>
-//   {item.name}, {item.address}, {item.prices.pb95}
-// </li>
-// ));
-
-// return (
-// <>
-//      <div>
-//       <ul>
-//         {items}
-//         </ul>
-//         </div>
-//         </>
-// )
-
-// }
-

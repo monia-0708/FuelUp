@@ -188,7 +188,7 @@ function Search() {
       <Stack sx={{ width: 350 }}>
         <ColorButton style={{ marginLeft: '20px', marginBottom: "30px", marginTop: "30px" }} onClick={handleClick} variant="contained">Gdzie Najtaniej ?</ColorButton>
       </Stack>
-      <Card title="">
+      <div>
       <ul>
       {selectedFuelPrices.length > 0 && (
         <ul>
@@ -207,8 +207,8 @@ function Search() {
         </ul>
       )}
         </ul>
-        </Card>
-      <Card title="">
+        </div>
+      <div>
       <div className="m-0">
         {namesStation.map((station) => (
           <div key={station.id}>
@@ -222,7 +222,7 @@ function Search() {
           </div>
         ))}
       </div>
-      </Card>
+      </div>
       
     </div>
   );

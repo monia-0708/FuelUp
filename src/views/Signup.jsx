@@ -10,11 +10,8 @@ import { useNavigate } from "react-router-dom";
 function Signup() {
   const toast = useRef(null);
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
 
-  const showError = (e, msg) => {
-    e.preventDefault();
+  const showError = (msg) => {    
     toast.current.show({
       severity: "error",
       summary: "Error",
@@ -39,7 +36,7 @@ function Signup() {
     });
 
     if (data.user) {
-      navigate("/");
+      navigate('/');
     } 
      if (error) {
       showError(error.message);
@@ -47,12 +44,9 @@ function Signup() {
 
     const handleAlreadyHaveAnAccount = () => {
       navigate("/signin");
-    };
-    
-  };
-
-
-
+    }
+  }
+  
   // const handleSubmit = (event) => {
   //   event.preventDefault();
   //   console.log("Username: ", username);
@@ -61,6 +55,7 @@ function Signup() {
   // };
 
   return (
+    <>
     <div className="signup-container">
       <Toast ref={toast} />
       <form className="formLog" onSubmit={handleSignUp}>
@@ -101,13 +96,14 @@ function Signup() {
         <div className="button-container card flex flex-wrap justify-content-center gap-3">
           <Button 
             className="button_regin1"
-            label="Zaloguj się"
+            label="Dołącz"
             severity="help"
             icon="pi pi-check"
           />
-          <Button 
+          <Button
+          //  onClick={handleAlreadyHaveAnAccount}
             className="button_regin2"
-            label="Nie masz jeszcze konta ?"
+            label="Posiadasz juz konto ?"
             severity="help"
             text
             
@@ -115,6 +111,7 @@ function Signup() {
         </div>
       </form>
     </div>
+    </>
   );
 }
 
